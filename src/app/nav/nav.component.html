@@ -1,21 +1,24 @@
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <a class="navbar-brand" routerLink="/">
         <img class="navbar-brand img-responsive" src="assets/images/zombio.png" alt="ZERO Logo" style="width:70px;height:70px;position:relative;">
         ZERO</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <button class="navbar-toggler" type="button" (click)="toggleNavbarCollapsing()">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <div [class.collapse]="navbarCollapsed" class="navbar-collapse" id="collapsibleNavbar">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/about">About</a>
-        </li>
+            <a class="nav-link" routerLink="/outbreak"><strong>Outbreak</strong></a>
+          </li> 
         <li class="nav-item">
           <a class="nav-link" routerLink="/news">News</a>
         </li>    
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/about">About</a>
+        </li>
       </ul>
     </div>  
   </nav>

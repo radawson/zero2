@@ -5,3 +5,30 @@ body {
     background-size: cover;
     -o-background-size: cover;
   }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.z-green {
+	color:#A6B556;
+}
+
+.z-green:hover {
+	color:#fff;
+}
+
+.z-red {
+	color:#A7323B;
+}
+
+.z-purple {
+	color:#63203F;
+}
+
+.z-black {
+	color:#15141A;
+}
+
+.z-gray {
+	color:#31253D;
+}
