@@ -1,0 +1,27 @@
+<nav class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Hamburger -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="icon-bar z-green"></span> 				
+                <span class="icon-bar z-green"></span> 
+                <span class="icon-bar z-green"></span>
+            </button>
+            <a class="navbar-brand z-green" style="font-size:30px;" routerLink="/">
+                <img class="navbar-brand img-responsive" src="assets/images/ZERO_Bio.png" alt="ZERO Logo" style="width:70px;height:70px;position:relative;top:-25px;left:-6px">
+                ZERO
+            </a>
+        </div>
+        <!-- End Hamburger -->
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav navbar-left nb-ul">
+                <li><a class="nb-a" style="text-align:center;font-size:20px;" routerLink="/">Home</a></li>
+                <li><a class="nb-a" style="text-align:center;font-size:20px;" routerLink="about.html">About</a></li>
+                <li><a class="nb-a" style="text-align:center;font-size:20px;" routerLink="news.html">News</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right nb-ul">
+                <li><a class="nb-a" routerLink="" onclick="changeLoginIconColor('click')" onmouseover="changeLoginIconColor('hover')" onmouseleave="changeLoginIconColor('leave')" style="text-align:center;font-size:20px;"><span class="glyphicon glyphicon-log-in z-green" id="login-icon" style="margin-right:6px;font-size:16px;"></span>Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
