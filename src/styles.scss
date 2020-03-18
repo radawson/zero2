@@ -1,1 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    background: url('/assets/images/zapocaplypse.jpg') center center/cover no-repeat fixed #ccc;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
