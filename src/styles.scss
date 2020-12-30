@@ -1,13 +1,58 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$zero-primary: mat-palette($mat-indigo);
+$zero-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$zero-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$zero-theme: mat-light-theme($zero-primary, $zero-accent, $zero-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($zero-theme);
+
+@font-face {
+  font-family: 'top_secretsans';
+  src: url('/assets/fonts/topsecret-sans-webfont.woff2') format('woff2'),
+       url('/assets/fonts/topsecret-sans-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  --z-green: #A6B556;
+  --z-red: #A7323B;
+  --z-purple: #63203F;
+  --z-black: #15141A;
+  --z-gray: #31253D;
+}
+
+html, body { height: 100%; }
+
 body {
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
     background: url('/assets/images/zapocaplypse.jpg') center center/cover no-repeat fixed #ccc;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
     -o-background-size: cover;
   }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .z-green {
 	color:#A6B556;

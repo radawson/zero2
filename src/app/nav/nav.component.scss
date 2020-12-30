@@ -1,11 +1,20 @@
-@font-face {
-    font-family: 'top_secretsans';
-    src: url('/assets/fonts/topsecret-sans-webfont.woff2') format('woff2'),
-         url('/assets/fonts/topsecret-sans-webfont.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+/* Main Navbar */
+.navbar-expand-md {
+    background-color: var(--z-gray);
+    font-family:'top_secretsans';
 }
 
-navbar-brand {
+.navbar-brand {
+    background-color: var(--z-gray);
 	font-family:'top_secretsans';
+}
+
+
+.navbar-collapse {
+    background-color: var(--z-gray);
+    font-family:'top_secretsans';
+}
+
+.navbar-nav > .active > a { 
+    background-color: var(--z-purple) ; 
 }
