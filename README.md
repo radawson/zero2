@@ -10,7 +10,7 @@ A Next.js 16 web app with Tailwind CSS and Prisma, rebuilt from the legacy Angul
 - **Tailwind CSS 4**
 - **Prisma 7** (PostgreSQL)
 - **React 19**
-- **NextAuth** (Auth.js) — SSO (Keycloak, Google, Facebook), role-based access
+- **NextAuth** (Auth.js) — Local (email/password), SSO (Keycloak, Google, Facebook), role-based access
 - **Zustand** — Cart state with persistence
 - **Stripe** — Checkout (card, Apple Pay, Google Pay)
 
@@ -46,7 +46,7 @@ A Next.js 16 web app with Tailwind CSS and Prisma, rebuilt from the legacy Angul
    npm run db:seed
    ```
 
-5. (Optional) Auth and payments: set env vars from `.env.example` (NextAuth, Keycloak/Google/Facebook, Stripe). Without them, sign-in and checkout will show errors when used.
+5. (Optional) Auth and payments: set env vars from `.env.example` (NextAuth, Keycloak/Google/Facebook, Stripe). **Local login** (email/password) works after seed — see [docs/LOGIN_PROVIDERS.md](docs/LOGIN_PROVIDERS.md) for configuring each provider.
 
 ## Development
 

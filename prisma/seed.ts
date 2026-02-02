@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
+import bcrypt from "bcrypt";
 import "dotenv/config";
 
 const connectionString =
@@ -10,6 +11,19 @@ const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
+  // Local login user (see docs/LOGIN_PROVIDERS.md). Password: admin123
+  const localPasswordHash = await bcrypt.hash("admin123", 10);
+  await prisma.user.upsert({
+    where: { email: "admin@example.com" },
+    update: { password: localPasswordHash },
+    create: {
+      email: "admin@example.com",
+      name: "Local Admin",
+      password: localPasswordHash,
+      role: "ADMIN",
+    },
+  });
+
   await prisma.outbreakPost.upsert({
     where: { slug: "day-one" },
     update: {},
