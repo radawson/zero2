@@ -15,12 +15,12 @@ export default async function ProductPage({
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <Link href="/shopping" className="mb-6 inline-block text-z-green hover:underline">
-        ← Merchandise
-      </Link>
-      <div className="mx-auto max-w-2xl">
+      <div className="panel panel-glow mx-auto max-w-2xl p-8 text-white">
+        <Link href="/shopping" className="mb-6 inline-block text-z-green transition-colors hover:text-z-green/80">
+          ← Merchandise
+        </Link>
         <div className="flex flex-col gap-8 sm:flex-row">
-          <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-lg bg-z-black/5 sm:w-64">
+          <div className="relative aspect-square w-full shrink-0 overflow-hidden rounded-lg bg-z-gray/30 sm:w-64">
             {product.imageUrl ? (
               <Image
                 src={product.imageUrl}
@@ -30,15 +30,15 @@ export default async function ProductPage({
                 priority
               />
             ) : (
-              <div className="flex h-full items-center justify-center text-z-black/30">
+              <div className="flex h-full items-center justify-center text-white/30">
                 No image
               </div>
             )}
           </div>
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-z-black">{product.name}</h1>
+            <h1 className="text-2xl font-bold text-shadow">{product.name}</h1>
             {product.description && (
-              <p className="mt-2 text-z-black/70">{product.description}</p>
+              <p className="mt-2 text-white/80">{product.description}</p>
             )}
             <p className="mt-4 text-xl font-semibold text-z-green">
               ${(product.priceCents / 100).toFixed(2)}

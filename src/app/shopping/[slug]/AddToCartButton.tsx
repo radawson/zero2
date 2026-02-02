@@ -26,7 +26,7 @@ export function AddToCartButton({ product }: { product: Product }) {
     <button
       type="button"
       onClick={() => addItem(item, 1)}
-      className="rounded bg-z-green px-6 py-3 font-medium text-white hover:opacity-90"
+      className="btn-primary"
     >
       Add to cart
     </button>

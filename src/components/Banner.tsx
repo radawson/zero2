@@ -3,12 +3,18 @@ import Link from "next/link";
 export function Banner() {
   return (
     <div
-      className="bg-amber-500/90 px-4 py-2 text-center text-z-black"
+      className="border-b border-z-red/50 bg-z-black/90 px-4 py-2.5 text-center text-white backdrop-blur-sm"
       role="alert"
     >
-      This site is currently undergoing maintenance.{" "}
-      <Link href="/outbreak" className="font-medium underline hover:text-z-purple">
-        here
+      <span className="mr-2 font-bold text-z-red" aria-hidden>
+        ☣
+      </span>
+      <span className="text-shadow">This site is currently undergoing maintenance.</span>{" "}
+      <Link
+        href="/outbreak"
+        className="font-medium text-z-green underline transition-colors hover:text-z-green/80"
+      >
+        Read the Outbreak
       </Link>
     </div>
   );

@@ -41,17 +41,14 @@ export function CheckoutForm() {
   }
 
   if (!mounted) {
-    return <p className="text-z-black/70">Loading…</p>;
+    return <p className="text-white/70">Loading…</p>;
   }
 
   if (items.length === 0) {
     return (
       <>
-        <p className="text-z-black/70">Your cart is empty.</p>
-        <Link
-          href="/shopping"
-          className="mt-4 inline-block rounded bg-z-green px-4 py-2 font-medium text-white hover:opacity-90"
-        >
+        <p className="text-white/70">Your cart is empty.</p>
+        <Link href="/shopping" className="btn-primary mt-4 inline-block">
           Browse merchandise
         </Link>
       </>
@@ -60,11 +57,11 @@ export function CheckoutForm() {
 
   return (
     <div className="max-w-lg">
-      <p className="mb-4 text-z-black/70">
-        Total: <strong className="text-z-black">${(totalCents / 100).toFixed(2)}</strong>
+      <p className="mb-4 text-white/80">
+        Total: <strong className="text-white text-shadow">${(totalCents / 100).toFixed(2)}</strong>
       </p>
       {error && (
-        <p className="mb-4 rounded border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+        <p className="mb-4 rounded border border-z-red/50 bg-z-red/20 p-3 text-sm text-z-red">
           {error}
         </p>
       )}
@@ -72,7 +69,7 @@ export function CheckoutForm() {
         type="button"
         onClick={handleCheckout}
         disabled={loading}
-        className="rounded bg-z-green px-6 py-3 font-medium text-white hover:opacity-90 disabled:opacity-50"
+        className="btn-primary disabled:opacity-50"
       >
         {loading ? "Redirecting…" : "Pay with Stripe (card, Apple Pay, Google Pay)"}
       </button>

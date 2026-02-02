@@ -18,15 +18,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col">
-        <Providers>
-          <Nav />
-          <Banner />
-          <main className="flex-1">
-            {children}
-            <div className="min-h-[4rem]" />
-          </main>
-          <Footer />
-        </Providers>
+        <div className="relative z-10 flex min-h-screen flex-col">
+          <Providers>
+            <Nav />
+            <Banner />
+            <main className="flex-1">
+              {children}
+              <div className="min-h-[4rem]" />
+            </main>
+            <Footer />
+          </Providers>
+        </div>
       </body>
     </html>
   );

@@ -33,9 +33,9 @@ export function ProductGrid({ products }: { products: Product[] }) {
       {products.map((p) => (
         <article
           key={p.id}
-          className="flex flex-col overflow-hidden rounded-lg border border-z-black/10 bg-white shadow-sm"
+          className="flex flex-col overflow-hidden rounded-lg border border-z-gray/50 bg-z-black/60 backdrop-blur-sm"
         >
-          <div className="relative aspect-square bg-z-black/5">
+          <div className="relative aspect-square bg-z-gray/30">
             {p.imageUrl ? (
               <Image
                 src={p.imageUrl}
@@ -45,15 +45,15 @@ export function ProductGrid({ products }: { products: Product[] }) {
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
             ) : (
-              <div className="flex h-full items-center justify-center text-z-black/30">
+              <div className="flex h-full items-center justify-center text-white/30">
                 No image
               </div>
             )}
           </div>
           <div className="flex flex-1 flex-col p-4">
-            <h2 className="font-bold text-z-black">{p.name}</h2>
+            <h2 className="font-bold text-white text-shadow">{p.name}</h2>
             {p.description && (
-              <p className="mt-1 flex-1 text-sm text-z-black/70">{p.description}</p>
+              <p className="mt-1 flex-1 text-sm text-white/70">{p.description}</p>
             )}
             <p className="mt-2 font-semibold text-z-green">
               ${(p.priceCents / 100).toFixed(2)}
@@ -61,14 +61,14 @@ export function ProductGrid({ products }: { products: Product[] }) {
             <div className="mt-4 flex gap-2">
               <Link
                 href={`/shopping/${p.slug}`}
-                className="flex-1 rounded border border-z-black/20 px-3 py-2 text-center text-sm font-medium hover:bg-z-black/5"
+                className="btn-secondary flex-1 px-3 py-2 text-center text-sm"
               >
                 View
               </Link>
               <button
                 type="button"
                 onClick={() => handleAdd(p)}
-                className="flex-1 rounded bg-z-green px-3 py-2 text-sm font-medium text-white hover:opacity-90"
+                className="btn-primary flex-1 px-3 py-2 text-sm"
               >
                 Add to cart
               </button>

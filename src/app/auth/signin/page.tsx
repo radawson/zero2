@@ -29,66 +29,79 @@ export default function SignInPage() {
 
   return (
     <div className="container mx-auto flex min-h-[60vh] flex-col items-center justify-center px-4 py-16">
-      <h1 className="mb-8 text-3xl font-bold text-z-black">Sign in to ZERO</h1>
+      <div className="panel panel-glow w-full max-w-md p-8 text-white">
+        <h1 className="mb-8 text-center text-3xl font-bold text-white text-shadow">
+          Sign in to ZERO
+        </h1>
 
-      <form
-        onSubmit={handleCredentialsSubmit}
-        className="mb-10 flex w-full max-w-sm flex-col gap-4"
-      >
-        <h2 className="text-lg font-semibold text-z-black">Email and password</h2>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="rounded border border-z-black/20 px-3 py-2"
-          autoComplete="email"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="rounded border border-z-black/20 px-3 py-2"
-          autoComplete="current-password"
-        />
-        {error && <p className="text-sm text-red-600">{error}</p>}
-        <button
-          type="submit"
-          disabled={loading}
-          className="rounded bg-z-black px-6 py-3 text-white hover:bg-z-gray disabled:opacity-50"
+        <form
+          onSubmit={handleCredentialsSubmit}
+          className="mb-8 flex flex-col gap-4"
         >
-          {loading ? "Signing in…" : "Sign in with email"}
-        </button>
-      </form>
+          <h2 className="text-lg font-semibold text-z-green">Email and password</h2>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+            className="input-dark"
+            autoComplete="email"
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            className="input-dark"
+            autoComplete="current-password"
+          />
+          {error && (
+            <p className="rounded border border-z-red/50 bg-z-red/20 px-3 py-2 text-sm text-z-red">
+              {error}
+            </p>
+          )}
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn-primary disabled:opacity-50"
+          >
+            {loading ? "Signing in…" : "Sign in with email"}
+          </button>
+        </form>
 
-      <p className="mb-4 text-sm text-z-black/60">Or sign in with:</p>
-      <div className="flex flex-col gap-4">
-        <button
-          type="button"
-          onClick={() => signIn("google", { callbackUrl: "/" })}
-          className="rounded bg-z-black px-6 py-3 text-white hover:bg-z-gray"
-        >
-          Sign in with Google
-        </button>
-        <button
-          type="button"
-          onClick={() => signIn("facebook", { callbackUrl: "/" })}
-          className="rounded bg-z-black px-6 py-3 text-white hover:bg-z-gray"
-        >
-          Sign in with Facebook
-        </button>
-        {process.env.NEXT_PUBLIC_KEYCLOAK_ENABLED === "true" && (
+        <div className="flex items-center gap-4">
+          <span className="h-px flex-1 bg-z-gray/50" />
+          <span className="text-sm text-white/60">or continue with</span>
+          <span className="h-px flex-1 bg-z-gray/50" />
+        </div>
+
+        <div className="mt-8 flex flex-col gap-3">
           <button
             type="button"
-            onClick={() => signIn("keycloak", { callbackUrl: "/" })}
-            className="rounded bg-z-black px-6 py-3 text-white hover:bg-z-gray"
+            onClick={() => signIn("google", { callbackUrl: "/" })}
+            className="btn-secondary w-full"
           >
-            Sign in with Keycloak
+            Sign in with Google
           </button>
-        )}
+          <button
+            type="button"
+            onClick={() => signIn("facebook", { callbackUrl: "/" })}
+            className="btn-secondary w-full"
+          >
+            Sign in with Facebook
+          </button>
+          {process.env.NEXT_PUBLIC_KEYCLOAK_ENABLED === "true" && (
+            <button
+              type="button"
+              onClick={() => signIn("keycloak", { callbackUrl: "/" })}
+              className="btn-secondary w-full"
+            >
+              Sign in with Keycloak
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

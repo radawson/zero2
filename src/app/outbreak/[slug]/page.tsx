@@ -11,25 +11,27 @@ export default async function OutbreakPostPage({ params }: Props) {
   if (!post) notFound();
 
   return (
-    <article className="container mx-auto max-w-2xl px-4 py-8">
-      <Link
-        href="/outbreak"
-        className="mb-6 inline-block text-z-purple hover:text-z-red"
-      >
-        ← Back to Outbreak
-      </Link>
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold text-z-black">{post.title}</h1>
-        <time
-          dateTime={post.createdAt.toISOString()}
-          className="mt-2 block text-sm text-z-gray"
+    <div className="container mx-auto px-4 py-8">
+      <article className="panel panel-glow mx-auto max-w-2xl p-8 text-white">
+        <Link
+          href="/outbreak"
+          className="mb-6 inline-block text-z-green transition-colors hover:text-z-green/80"
         >
-          {post.createdAt.toLocaleDateString()}
-        </time>
-      </header>
-      <div className="max-w-none whitespace-pre-wrap text-z-gray">
-        {post.content}
-      </div>
-    </article>
+          ← Back to Outbreak
+        </Link>
+        <header className="mb-8">
+          <h1 className="text-3xl font-bold text-shadow">{post.title}</h1>
+          <time
+            dateTime={post.createdAt.toISOString()}
+            className="mt-2 block text-sm text-z-green/90"
+          >
+            {post.createdAt.toLocaleDateString()}
+          </time>
+        </header>
+        <div className="max-w-none whitespace-pre-wrap text-white/90 text-shadow">
+          {post.content}
+        </div>
+      </article>
+    </div>
   );
 }

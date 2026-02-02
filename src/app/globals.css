@@ -25,4 +25,63 @@ body {
   margin: 0;
   font-family: "top_secretsans", Roboto, "Helvetica Neue", sans-serif;
   background: url("/images/zapocaplypse.jpg") center center / cover no-repeat fixed #ccc;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(21, 20, 26, 0.25) 0%,
+    rgba(21, 20, 26, 0.5) 50%,
+    rgba(21, 20, 26, 0.7) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Panels */
+.panel {
+  @apply rounded-lg border border-z-gray/50 bg-z-black/80 backdrop-blur-md;
+}
+.panel-solid {
+  @apply rounded-lg border border-z-gray/50 bg-z-black;
+}
+.panel-glow {
+  box-shadow: 0 0 20px rgba(166, 181, 86, 0.15);
+}
+
+/* Buttons */
+.btn-primary {
+  @apply rounded-lg bg-z-green px-6 py-3 font-bold text-z-black transition-all;
+}
+.btn-primary:hover {
+  box-shadow: 0 0 15px rgba(166, 181, 86, 0.5);
+}
+.btn-secondary {
+  @apply rounded-lg border border-z-gray/50 bg-z-gray px-6 py-3 text-white transition-colors;
+}
+.btn-secondary:hover {
+  @apply border-z-green/50;
+}
+
+/* Inputs (dark theme) */
+.input-dark {
+  @apply w-full rounded-lg border border-z-gray/50 bg-z-black/60 px-3 py-2 text-white placeholder:text-white/50;
+}
+.input-dark:focus {
+  @apply border-z-green outline-none ring-2 ring-z-green/30;
+}
+
+/* Text effects */
+.text-glow {
+  text-shadow: 0 0 10px currentColor;
+}
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+.text-shadow-lg {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
 }
