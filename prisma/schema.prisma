@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -12,13 +9,120 @@ datasource db {
   provider = "postgresql"
 }
 
+// --- Auth.js (NextAuth) ---
+enum Role {
+  USER
+  AUTHOR
+  ADMIN
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  role          Role      @default(USER)
+  accounts      Account[]
+  sessions      Session[]
+  outbreakPosts OutbreakPost[]
+  channelAuthors ChannelAuthor[]
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  @@id([identifier, token])
+}
+
+// --- Outbreak blog + channels ---
+model OutbreakChannel {
+  id          String         @id @default(cuid())
+  name        String
+  slug        String         @unique
+  description String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  posts       OutbreakPost[]
+  authors     ChannelAuthor[]
+}
+
+model ChannelAuthor {
+  channelId String
+  userId    String
+  channel   OutbreakChannel @relation(fields: [channelId], references: [id], onDelete: Cascade)
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@id([channelId, userId])
+}
+
 model OutbreakPost {
-  id        String   @id @default(cuid())
-  slug      String   @unique
+  id        String           @id @default(cuid())
+  slug      String           @unique
   title     String
   excerpt   String?
   content   String
-  published Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  published Boolean          @default(false)
+  authorId  String?
+  channelId String?
+  createdAt DateTime         @default(now())
+  updatedAt DateTime         @updatedAt
+  author    User?            @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  channel   OutbreakChannel? @relation(fields: [channelId], references: [id], onDelete: SetNull)
+}
+
+// --- Merchandise + orders ---
+model Product {
+  id          String       @id @default(cuid())
+  name        String
+  slug        String       @unique
+  description String?
+  priceCents  Int
+  imageUrl    String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  stripePaymentId String?   @unique
+  status        String      @default("pending") // pending | paid | fulfilled
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id        String   @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  priceCents Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  @@unique([orderId, productId])
 }

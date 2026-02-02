@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useSession, signOut } from "next-auth/react";
 import { useState } from "react";
 
 export function Nav() {
   const [collapsed, setCollapsed] = useState(true);
+  const { data: session, status } = useSession();
 
   return (
     <nav className="flex flex-wrap items-center justify-between gap-2 bg-z-black/90 px-4 py-2 text-white">
@@ -75,6 +77,32 @@ export function Nav() {
               Test
             </Link>
           </li>
+          {status === "authenticated" ? (
+            <>
+              {(session.user?.role === "ADMIN" || session.user?.role === "AUTHOR") && (
+                <li>
+                  <Link href="/admin" className="block px-2 py-1 hover:text-z-green">
+                    Admin
+                  </Link>
+                </li>
+              )}
+              <li>
+                <button
+                  type="button"
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                  className="block px-2 py-1 hover:text-z-green"
+                >
+                  Sign out
+                </button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link href="/auth/signin" className="block px-2 py-1 hover:text-z-green">
+                Sign in
+              </Link>
+            </li>
+          )}
         </ul>
       </div>
     </nav>

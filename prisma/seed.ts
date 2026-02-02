@@ -41,6 +41,41 @@ Join us. Be prepared.`,
       published: true,
     },
   });
+
+  // Merchandise
+  await prisma.product.upsert({
+    where: { slug: "zero-patch" },
+    update: {},
+    create: {
+      name: "Z.E.R.O. Patch",
+      slug: "zero-patch",
+      description: "Official embroidered patch. Show you're prepared.",
+      priceCents: 899,
+      imageUrl: "/images/zeropatch-lg.png",
+    },
+  });
+  await prisma.product.upsert({
+    where: { slug: "survival-kit" },
+    update: {},
+    create: {
+      name: "Survival Kit",
+      slug: "survival-kit",
+      description: "Essential supplies for the first 72 hours.",
+      priceCents: 4999,
+      imageUrl: null,
+    },
+  });
+  await prisma.product.upsert({
+    where: { slug: "field-manual" },
+    update: {},
+    create: {
+      name: "Field Manual",
+      slug: "field-manual",
+      description: "Printed guide: protocols, maps, and checklists.",
+      priceCents: 1999,
+      imageUrl: null,
+    },
+  });
 }
 
 main()
