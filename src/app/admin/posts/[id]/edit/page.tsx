@@ -32,6 +32,7 @@ export default async function EditPostPage({
     title: post.title,
     excerpt: post.excerpt ?? null,
     content: post.content,
+    featuredImage: (post as { featuredImage?: string | null }).featuredImage ?? null,
     published: post.published,
     channelId: (post as { channelId?: string | null }).channelId ?? null,
     channel: channel ? { id: channel.id, name: channel.name, slug: channel.slug } : null,

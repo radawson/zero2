@@ -40,6 +40,9 @@ speed-measure-plugin*.json
 /.next/
 /out/
 
+# User uploads (blog images)
+/public/uploads
+
 # misc
 /.sass-cache
 /connect.lock

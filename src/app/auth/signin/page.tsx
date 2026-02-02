@@ -1,13 +1,44 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { useState } from "react";
+import { signIn, getProviders } from "next-auth/react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 
-export default function SignInPage() {
+type ProviderId = "google" | "facebook" | "keycloak";
+
+const OAUTH_LABELS: Record<ProviderId, string> = {
+  google: "Sign in with Google",
+  facebook: "Sign in with Facebook",
+  keycloak: "Sign in with Keycloak",
+};
+
+function SignInForm() {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [oauthProviders, setOauthProviders] = useState<ProviderId[]>([]);
+
+  useEffect(() => {
+    getProviders().then((providers) => {
+      if (!providers) return;
+      const ids: ProviderId[] = [];
+      if (providers.google) ids.push("google");
+      if (providers.facebook) ids.push("facebook");
+      if (providers.keycloak) ids.push("keycloak");
+      setOauthProviders(ids);
+    });
+  }, []);
+
+  useEffect(() => {
+    const err = searchParams.get("error");
+    if (err === "Configuration") {
+      setError("OAuth provider is not configured. Set GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET (and similar for other providers) in .env — see docs/LOGIN_PROVIDERS.md.");
+    } else if (err) {
+      setError("Sign-in failed. Try again or use email and password.");
+    }
+  }, [searchParams]);
 
   async function handleCredentialsSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -25,6 +56,11 @@ export default function SignInPage() {
       return;
     }
     if (res?.url) window.location.href = res.url;
+  }
+
+  function handleOAuthSignIn(providerId: ProviderId) {
+    setError("");
+    signIn(providerId, { callbackUrl: "/" });
   }
 
   return (
@@ -71,38 +107,43 @@ export default function SignInPage() {
           </button>
         </form>
 
-        <div className="flex items-center gap-4">
-          <span className="h-px flex-1 bg-z-gray/50" />
-          <span className="text-sm text-white/60">or continue with</span>
-          <span className="h-px flex-1 bg-z-gray/50" />
-        </div>
+        {oauthProviders.length > 0 && (
+          <>
+            <div className="flex items-center gap-4">
+              <span className="h-px flex-1 bg-z-gray/50" />
+              <span className="text-sm text-white/60">or continue with</span>
+              <span className="h-px flex-1 bg-z-gray/50" />
+            </div>
 
-        <div className="mt-8 flex flex-col gap-3">
-          <button
-            type="button"
-            onClick={() => signIn("google", { callbackUrl: "/" })}
-            className="btn-secondary w-full"
-          >
-            Sign in with Google
-          </button>
-          <button
-            type="button"
-            onClick={() => signIn("facebook", { callbackUrl: "/" })}
-            className="btn-secondary w-full"
-          >
-            Sign in with Facebook
-          </button>
-          {process.env.NEXT_PUBLIC_KEYCLOAK_ENABLED === "true" && (
-            <button
-              type="button"
-              onClick={() => signIn("keycloak", { callbackUrl: "/" })}
-              className="btn-secondary w-full"
-            >
-              Sign in with Keycloak
-            </button>
-          )}
-        </div>
+            <div className="mt-8 flex flex-col gap-3">
+              {oauthProviders.map((id) => (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => handleOAuthSignIn(id)}
+                  className="btn-secondary w-full"
+                >
+                  {OAUTH_LABELS[id]}
+                </button>
+              ))}
+            </div>
+          </>
+        )}
+
+        {oauthProviders.length === 0 && (
+          <p className="mt-6 text-center text-sm text-white/60">
+            Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET (or other providers) to .env to enable social sign-in. See docs/LOGIN_PROVIDERS.md.
+          </p>
+        )}
       </div>
     </div>
+  );
+}
+
+export default function SignInPage() {
+  return (
+    <Suspense fallback={<div className="container mx-auto flex min-h-[60vh] items-center justify-center px-4 py-16 text-white">Loading…</div>}>
+      <SignInForm />
+    </Suspense>
   );
 }

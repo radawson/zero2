@@ -2,6 +2,9 @@
 
 import { useRouter } from "next/navigation";
 import { createPostAction } from "../actions";
+import { MarkdownEditor } from "@/src/components/MarkdownEditor";
+import { FeaturedImageUpload } from "@/src/components/FeaturedImageUpload";
+
 export function CreatePostForm({
   channels,
 }: {
@@ -21,7 +24,7 @@ export function CreatePostForm({
   }
 
   return (
-    <form action={handleSubmit} className="max-w-xl space-y-4">
+    <form action={handleSubmit} className="max-w-4xl space-y-4">
       <div>
         <label htmlFor="title" className="block font-medium text-z-black">
           Title
@@ -43,17 +46,12 @@ export function CreatePostForm({
           className="mt-1 w-full rounded border border-z-gray/30 px-3 py-2 text-z-black"
         />
       </div>
+      <FeaturedImageUpload name="featuredImage" />
       <div>
         <label htmlFor="content" className="block font-medium text-z-black">
           Content
         </label>
-        <textarea
-          id="content"
-          name="content"
-          required
-          rows={10}
-          className="mt-1 w-full rounded border border-z-gray/30 px-3 py-2 text-z-black"
-        />
+        <MarkdownEditor name="content" id="content" minHeight="320px" />
       </div>
       {channels.length > 0 && (
         <div>

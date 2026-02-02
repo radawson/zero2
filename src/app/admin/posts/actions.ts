@@ -4,6 +4,7 @@ import {
   createPost,
   updatePost,
   deletePost,
+  togglePostPublished,
 } from "@/src/lib/admin";
 
 export async function createPostAction(formData: FormData) {
@@ -16,4 +17,8 @@ export async function updatePostAction(id: string, formData: FormData) {
 
 export async function deletePostAction(id: string) {
   await deletePost(id);
+}
+
+export async function togglePostPublishedAction(id: string) {
+  await togglePostPublished(id);
 }

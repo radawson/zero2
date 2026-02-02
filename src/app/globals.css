@@ -85,3 +85,110 @@ body::before {
 .text-shadow-lg {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
 }
+
+/* Markdown prose (public post view) */
+.markdown-prose h1,
+.markdown-prose h2,
+.markdown-prose h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.markdown-prose h1:first-child,
+.markdown-prose h2:first-child,
+.markdown-prose h3:first-child {
+  margin-top: 0;
+}
+.markdown-prose h1 { font-size: 1.5em; }
+.markdown-prose h2 { font-size: 1.25em; }
+.markdown-prose h3 { font-size: 1.1em; }
+.markdown-prose p { margin-bottom: 1em; }
+.markdown-prose ul, .markdown-prose ol {
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+.markdown-prose ul { list-style-type: disc; }
+.markdown-prose ol { list-style-type: decimal; }
+.markdown-prose li { margin-bottom: 0.25em; }
+.markdown-prose a {
+  color: var(--color-z-green);
+  text-decoration: underline;
+}
+.markdown-prose a:hover { opacity: 0.9; }
+.markdown-prose img { max-width: 100%; height: auto; border-radius: 0.375rem; }
+.markdown-prose pre {
+  margin: 1em 0;
+  padding: 1em;
+  overflow-x: auto;
+  border-radius: 0.375rem;
+  background: rgba(49, 37, 61, 0.6);
+  font-size: 0.875em;
+  line-height: 1.5;
+}
+.markdown-prose code {
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  background: rgba(49, 37, 61, 0.5);
+  font-size: 0.9em;
+}
+.markdown-prose pre code { padding: 0; background: transparent; }
+.markdown-prose blockquote {
+  margin: 1em 0;
+  padding-left: 1em;
+  border-left: 4px solid var(--color-z-green);
+  color: rgba(255, 255, 255, 0.85);
+}
+.markdown-prose hr { margin: 1.5em 0; border-color: rgba(255, 255, 255, 0.2); }
+.markdown-prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+}
+.markdown-prose th, .markdown-prose td {
+  padding: 0.5em 0.75em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: left;
+}
+.markdown-prose th { font-weight: 600; background: rgba(255, 255, 255, 0.05); }
+
+/* Markdown editor preview (admin) */
+.markdown-editor .markdown-preview {
+  font-size: 0.9rem;
+}
+.markdown-editor .markdown-preview h1,
+.markdown-editor .markdown-preview h2,
+.markdown-editor .markdown-preview h3 {
+  margin-top: 0.75em;
+  margin-bottom: 0.35em;
+  font-weight: 700;
+}
+.markdown-editor .markdown-preview h1 { font-size: 1.25em; }
+.markdown-editor .markdown-preview h2 { font-size: 1.1em; }
+.markdown-editor .markdown-preview h3 { font-size: 1em; }
+.markdown-editor .markdown-preview p { margin-bottom: 0.5em; }
+.markdown-editor .markdown-preview ul, .markdown-editor .markdown-preview ol {
+  padding-left: 1.25em;
+  margin-bottom: 0.5em;
+}
+.markdown-editor .markdown-preview a { color: var(--color-z-green); }
+.markdown-editor .markdown-preview img { max-width: 100%; height: auto; }
+.markdown-editor .markdown-preview pre {
+  padding: 0.5em;
+  overflow-x: auto;
+  font-size: 0.8em;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.25rem;
+}
+.markdown-editor .markdown-preview code {
+  padding: 0.15em 0.3em;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 0.2rem;
+  font-size: 0.85em;
+}
+.markdown-editor .markdown-preview blockquote {
+  padding-left: 0.75em;
+  border-left: 3px solid var(--color-z-green);
+  margin: 0.5em 0;
+  opacity: 0.95;
+}

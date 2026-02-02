@@ -64,6 +64,7 @@ export async function createPost(formData: FormData) {
   const title = formData.get("title") as string;
   const excerpt = (formData.get("excerpt") as string) || null;
   const content = formData.get("content") as string;
+  const featuredImage = (formData.get("featuredImage") as string) || null;
   const channelId = (formData.get("channelId") as string) || null;
   const published = formData.get("published") === "on";
 
@@ -89,6 +90,7 @@ export async function createPost(formData: FormData) {
       title: title.trim(),
       excerpt: excerpt?.trim() || null,
       content: content.trim(),
+      featuredImage: featuredImage?.trim() || null,
       slug,
       published,
       authorId: session.user.id,
@@ -120,6 +122,7 @@ export async function updatePost(id: string, formData: FormData) {
   const title = formData.get("title") as string;
   const excerpt = (formData.get("excerpt") as string) || null;
   const content = formData.get("content") as string;
+  const featuredImage = (formData.get("featuredImage") as string) || null;
   const channelId = (formData.get("channelId") as string) || null;
   const published = formData.get("published") === "on";
 
@@ -129,6 +132,7 @@ export async function updatePost(id: string, formData: FormData) {
     title: title.trim(),
     excerpt: excerpt?.trim() || null,
     content: content.trim(),
+    featuredImage: featuredImage?.trim() || null,
     published,
   };
   if (session.user.role === "ADMIN") {
@@ -159,6 +163,26 @@ export async function deletePost(id: string) {
   await prisma.outbreakPost.delete({ where: { id } });
   revalidatePath("/admin/posts");
   revalidatePath("/outbreak");
+}
+
+export async function togglePostPublished(id: string) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user?.id) throw new Error("Unauthorized");
+
+  const post = await prisma.outbreakPost.findUnique({ where: { id } });
+  if (!post) throw new Error("Post not found");
+
+  if (session.user.role === "AUTHOR" && post.authorId !== session.user.id) {
+    throw new Error("You can only change your own posts");
+  }
+
+  await prisma.outbreakPost.update({
+    where: { id },
+    data: { published: !post.published },
+  });
+  revalidatePath("/admin/posts");
+  revalidatePath("/outbreak");
+  revalidatePath(`/outbreak/${post.slug}`);
 }
 
 export async function createChannel(formData: FormData) {

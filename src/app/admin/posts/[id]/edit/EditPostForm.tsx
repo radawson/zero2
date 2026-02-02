@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { updatePostAction, deletePostAction } from "../../actions";
+import { MarkdownEditor } from "@/src/components/MarkdownEditor";
+import { FeaturedImageUpload } from "@/src/components/FeaturedImageUpload";
 
 type Post = {
   id: string;
@@ -9,6 +11,7 @@ type Post = {
   title: string;
   excerpt: string | null;
   content: string;
+  featuredImage: string | null;
   published: boolean;
   channelId: string | null;
   channel: { id: string; name: string; slug: string } | null;
@@ -51,7 +54,7 @@ export function EditPostForm({
   }
 
   return (
-    <form action={handleSubmit} className="max-w-xl space-y-4">
+    <form action={handleSubmit} className="max-w-4xl space-y-4">
       <div>
         <label htmlFor="title" className="block font-medium text-z-black">
           Title
@@ -75,17 +78,16 @@ export function EditPostForm({
           className="mt-1 w-full rounded border border-z-gray/30 px-3 py-2 text-z-black"
         />
       </div>
+      <FeaturedImageUpload name="featuredImage" defaultValue={post.featuredImage} />
       <div>
         <label htmlFor="content" className="block font-medium text-z-black">
           Content
         </label>
-        <textarea
-          id="content"
+        <MarkdownEditor
           name="content"
+          id="content"
           defaultValue={post.content}
-          required
-          rows={10}
-          className="mt-1 w-full rounded border border-z-gray/30 px-3 py-2 text-z-black"
+          minHeight="320px"
         />
       </div>
       {isAdmin && channels.length > 0 && (
