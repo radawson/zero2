@@ -31,6 +31,15 @@ speed-measure-plugin*.json
 !.vscode/extensions.json
 .history/*
 
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Next.js
+/.next/
+/out/
+
 # misc
 /.sass-cache
 /connect.lock
@@ -44,3 +53,5 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+/src/generated/prisma

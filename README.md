@@ -1,27 +1,81 @@
-# Zero
+# ZERO
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
+**Z**ombie **E**mergency **R**esponse **O**rganization — Be prepared for anything.
 
-## Development server
+A Next.js 16 web app with Tailwind CSS and Prisma, rebuilt from the legacy Angular version.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Tech stack
 
-## Code scaffolding
+- **Next.js 16** (App Router, Turbopack)
+- **Tailwind CSS 4**
+- **Prisma 7** (PostgreSQL)
+- **React 19**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Prerequisites
+
+- Node.js 18+
+- PostgreSQL (or Docker)
+
+## Setup
+
+1. Clone and install:
+
+   ```bash
+   npm install
+   ```
+
+2. Copy `.env.example` to `.env` and adjust if needed:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Start Postgres (e.g. with Docker):
+
+   ```bash
+   docker compose up -d
+   ```
+
+4. Run migrations and seed:
+
+   ```bash
+   npx prisma migrate dev
+   npm run db:seed
+   ```
+
+## Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3001](http://localhost:3001).
 
 ## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```bash
+npm run build
+npm run start
+```
 
-## Running unit tests
+## Scripts
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+| Script        | Description                    |
+| ------------- | ------------------------------ |
+| `npm run dev` | Start dev server (port 3001)   |
+| `npm run build` | Production build             |
+| `npm run start` | Start production server      |
+| `npm run db:seed` | Seed the database          |
+| `npm run lint` | Run ESLint                    |
 
-## Running end-to-end tests
+## Routes
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+- `/` — Home
+- `/about` — About
+- `/join` — Join ZERO
+- `/shopping` — Merchandise
+- `/news` — News
+- `/outbreak` — Outbreak blog (list)
+- `/outbreak/[slug]` — Blog post detail
+- `/cart` — Cart
+- `/test` — Test page

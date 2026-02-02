@@ -1,0 +1,28 @@
+@import "tailwindcss";
+
+@theme {
+  --color-z-green: #a6b556;
+  --color-z-red: #a7323b;
+  --color-z-purple: #63203f;
+  --color-z-black: #15141a;
+  --color-z-gray: #31253d;
+}
+
+@font-face {
+  font-family: "top_secretsans";
+  src: url("/fonts/topsecret-sans-webfont.woff2") format("woff2"),
+    url("/fonts/topsecret-sans-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "top_secretsans", Roboto, "Helvetica Neue", sans-serif;
+  background: url("/images/zapocaplypse.jpg") center center / cover no-repeat fixed #ccc;
+}
